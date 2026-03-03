@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { generateLevel } from './PathGenerator';
 import type { GridCell, LevelConfig } from './PathGenerator';
 import { checkWin } from './pathResolver';
+import type { PathNode } from './pathResolver';
 import ChevronStraight from './components/ChevronStraight';
 import ChevronTurnRight from './components/ChevronTurnRight';
 import ChevronTurnLeft from './components/ChevronTurnLeft';
@@ -41,9 +42,13 @@ const AstroPath = () => {
     const [level, setLevel] = useState<number>(1);
     const [score, setScore] = useState<number>(0);
     const [rotations, setRotations] = useState<number>(0);
-    const [gameState, setGameState] = useState<'START' | 'PLAYING' | 'WIN' | 'GAME_OVER'>('START');
+    const [gameState, setGameState] = useState<'START' | 'PLAYING' | 'ANIMATING' | 'WIN' | 'GAME_OVER'>('START');
     const [config, setConfig] = useState<LevelConfig | null>(null);
     const [grid, setGrid] = useState<GridCell[][]>([]);
+
+    // Animation states
+    const [animFrames, setAnimFrames] = useState<{ x: number, y: number, deg: number }[]>([]);
+    const [animatingIndex, setAnimatingIndex] = useState(0);
 
     // Dynamic difficulty: larger grids and tighter times
     const currentGridSize = 4 + Math.floor(level / 2); // 4x4, 4x4, 5x5, 5x5...
@@ -59,6 +64,8 @@ const AstroPath = () => {
         setGrid(newConfig.grid);
         setRotations(0);
         setTimeLeft(initialTime);
+        setAnimFrames([]);
+        setAnimatingIndex(0);
         setGameState('PLAYING');
         start();
     }, [currentGridSize, initialTime, setTimeLeft, start]);
@@ -74,13 +81,62 @@ const AstroPath = () => {
             if (timeLeft === 0) {
                 setGameState('GAME_OVER');
                 stop();
-            } else if (config && checkWin(grid, config)) {
-                // WON!
-                stop();
-                setGameState('WIN');
+            } else if (config) {
+                const pathResult = checkWin(grid, config);
+                if (pathResult) {
+                    stop();
+
+                    const frames: { x: number, y: number, deg: number }[] = [];
+                    let currentH = 1; // Start heading is RIGHT (1)
+                    let currentDeg = 0; // The rocket SVG natively points RIGHT, so 0 deg = RIGHT
+
+                    // Add an initial frame just outside the board
+                    frames.push({ x: config.startX - 1, y: config.startY, deg: currentDeg });
+
+                    for (const node of pathResult) {
+                        // Move into the tile maintaining current heading
+                        frames.push({ x: node.x, y: node.y, deg: currentDeg });
+
+                        if (node.entry_h !== node.exit_h) {
+                            // Turn inside the tile
+                            let diff = node.exit_h - currentH;
+                            if (diff === -3) diff = 1;
+                            if (diff === 3) diff = -1;
+
+                            currentDeg += diff * 90;
+                            currentH = node.exit_h;
+
+                            frames.push({ x: node.x, y: node.y, deg: currentDeg });
+                        } else {
+                            currentH = node.exit_h;
+                        }
+                    }
+
+                    setAnimFrames(frames);
+                    setAnimatingIndex(0);
+                    setGameState('ANIMATING');
+                }
             }
         }
     }, [grid, config, timeLeft, gameState, stop]);
+
+    // Rocket Traverse Animation Loop
+    useEffect(() => {
+        if (gameState === 'ANIMATING' && animFrames.length > 0) {
+            if (animatingIndex < animFrames.length - 1) {
+                const timer = setTimeout(() => {
+                    setAnimatingIndex(prev => prev + 1);
+                }, 300); // 300ms transition time per action
+                return () => clearTimeout(timer);
+            } else if (animatingIndex === animFrames.length - 1) {
+                // Wait briefly at the end before showing win screen
+                const timer = setTimeout(() => {
+                    setGameState('WIN');
+                }, 400);
+                return () => clearTimeout(timer);
+            }
+        }
+    }, [gameState, animatingIndex, animFrames]);
 
     const handleRotate = (x: number, y: number) => {
         if (gameState !== 'PLAYING') return;
@@ -139,7 +195,7 @@ const AstroPath = () => {
             </div>
 
             {/* Game Grid Area */}
-            {gameState === 'PLAYING' && (
+            {(gameState === 'PLAYING' || gameState === 'ANIMATING') && (
                 <div className="flex flex-col items-center mb-6">
                     <div className="text-slate-400 text-sm mb-4 bg-slate-800/60 px-4 py-2 rounded-full border border-slate-700/50">
                         Rotations used: <span className="text-white font-bold">{rotations}</span>
@@ -151,6 +207,26 @@ const AstroPath = () => {
                             gridTemplateColumns: `repeat(${config.width}, minmax(0, 1fr))`
                         }}
                     >
+                        {/* Animating Rocket */}
+                        {gameState === 'ANIMATING' && animFrames.length > 0 && (() => {
+                            const frame = animFrames[Math.min(animatingIndex, animFrames.length - 1)];
+                            const leftPercent = (frame.x + 0.5) * (100 / config.width);
+                            const topPercent = (frame.y + 0.5) * (100 / config.height);
+
+                            return (
+                                <div
+                                    className="absolute z-20 w-8 h-8 md:w-12 md:h-12 pointer-events-none transition-all duration-300 ease-linear"
+                                    style={{
+                                        left: `${leftPercent}%`,
+                                        top: `${topPercent}%`,
+                                        transform: `translate(-50%, -50%) rotate(${frame.deg}deg)`
+                                    }}
+                                >
+                                    <RocketLogo className="w-full h-full drop-shadow-2xl text-emerald-300" />
+                                </div>
+                            );
+                        })()}
+
                         {grid.map((row, y) => (
                             row.map((cell, x) => {
                                 const isStart = x === config.startX && y === config.startY;
@@ -179,7 +255,7 @@ const AstroPath = () => {
                                         )}
 
                                         {/* Overlays for Start/End */}
-                                        {isStart && (
+                                        {isStart && gameState !== 'ANIMATING' && (
                                             <div className="absolute -left-6 md:-left-10 z-10 w-8 h-8 md:w-12 md:h-12 pointer-events-none transform -rotate-90">
                                                 <RocketLogo className="w-full h-full drop-shadow-lg" />
                                             </div>
