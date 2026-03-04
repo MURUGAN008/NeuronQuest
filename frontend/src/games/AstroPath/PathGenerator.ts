@@ -89,14 +89,55 @@ export const generateLevel = (width: number, height: number): LevelConfig => {
     }
 
     // Fill red herrings and scramble rotations
+    // Instead of random noise, actively try to build connected branches off the main path
+    const branchVisited = Array.from({ length: height }, (_, y) => Array.from({ length: width }, (_, x) => pathGrid![y][x].isPath || false));
     const tileTypes: TileType[] = ['straight', 'turnRight', 'turnLeft'];
+
+    const buildBranch = (x: number, y: number, length: number) => {
+        if (length === 0) return;
+
+        let cx = x;
+        let cy = y;
+
+        for (let i = 0; i < length; i++) {
+            // Pick a random unvisited neighbor
+            const neighbors = [];
+            for (let d = 0; d < 4; d++) {
+                const nx = cx + dx[d];
+                const ny = cy + dy[d];
+                if (nx >= 0 && nx < width && ny >= 0 && ny < height && !branchVisited[ny][nx]) {
+                    neighbors.push({ x: nx, y: ny });
+                }
+            }
+
+            if (neighbors.length === 0) break; // Trapped
+
+            // Pick a random neighbor and carve a path to it
+            const next = neighbors[Math.floor(Math.random() * neighbors.length)];
+            branchVisited[next.y][next.x] = true;
+            pathGrid![next.y][next.x].type = tileTypes[Math.floor(Math.random() * tileTypes.length)];
+
+            cx = next.x;
+            cy = next.y;
+        }
+    };
+
+    // For every tile on the main path, occasionally build a confusing branch outwards
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
-            if (!pathGrid[y][x].isPath) {
-                // Small chance to be empty, mostly red herrings to make it tricky!
-                if (Math.random() < 0.15) {
-                    pathGrid[y][x].type = 'empty';
-                } else {
+            if (pathGrid[y][x].isPath && Math.random() < 0.3) {
+                // Build a contiguous wrong turn off this tile
+                buildBranch(x, y, Math.floor(Math.random() * 4) + 1);
+            }
+        }
+    }
+
+    // Fill the remaining empty spots with random noise and scramble everything
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            if (pathGrid[y][x].type === 'empty') {
+                // 30% chance to leave it empty for aesthetic spacing, otherwise clutter it
+                if (Math.random() > 0.3) {
                     pathGrid[y][x].type = tileTypes[Math.floor(Math.random() * tileTypes.length)];
                 }
             }

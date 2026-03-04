@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import mathSprintThumb from '../assets/mathsprint-thumb.png';
+import astropathThumb from '../assets/astropath-thumb.png';
+import invisibleMazeThumb from '../assets/invisiblemaze-thumb.png';
+import dualNBackThumb from '../assets/dualnback-thumb.png';
 
 const Games = () => {
     const games = [
@@ -7,14 +11,32 @@ const Games = () => {
             title: 'Math Sprint',
             description: 'Test your mental math speed with progressively harder shortcuts.',
             path: '/MathSprint',
-            color: 'bg-blue-500'
+            color: 'bg-blue-500',
+            image: mathSprintThumb
         },
         {
             id: 'astropath',
             title: 'AstroPath',
             description: 'Guide the rocket! Rotate path tiles strategically to build an unbroken route.',
             path: '/astropath',
-            color: 'bg-emerald-500'
+            color: 'bg-emerald-500',
+            image: astropathThumb
+        },
+        {
+            id: 'invisible-maze',
+            title: 'Invisible Maze',
+            description: 'Memory challenge! Navigate a labyrinth where walls are hidden until you crash into them.',
+            path: '/invisible-maze',
+            color: 'bg-indigo-500',
+            image: invisibleMazeThumb
+        },
+        {
+            id: 'dual-n-back',
+            title: 'Dual N-Back',
+            description: 'The ultimate working memory test. Track simultaneous audio and visual sequences to expand your fluid intelligence.',
+            path: '/dual-n-back',
+            color: 'bg-purple-500',
+            image: dualNBackThumb
         }
     ];
 
@@ -38,6 +60,12 @@ const Games = () => {
                             className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
                         >
                             <div className={`absolute top-0 left-0 w-full h-2 ${game.color} transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out`} />
+
+                            {game.image && (
+                                <div className="w-full h-48 mb-6 rounded-xl border border-slate-100 shadow-sm overflow-hidden bg-slate-50 flex items-center justify-center p-2">
+                                    <img src={game.image} alt={`${game.title} preview`} className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.05]" />
+                                </div>
+                            )}
 
                             <h2 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
                                 {game.title}
