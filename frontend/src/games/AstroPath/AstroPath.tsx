@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { generateLevel } from './PathGenerator';
 import type { GridCell, LevelConfig } from './PathGenerator';
 import { checkWin } from './pathResolver';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
-import type { PathNode } from './pathResolver';
+// import type { PathNode } from './pathResolver';
 import ChevronStraight from './components/ChevronStraight';
 import ChevronTurnRight from './components/ChevronTurnRight';
 import ChevronTurnLeft from './components/ChevronTurnLeft';
