@@ -180,35 +180,35 @@ const AstroPath = () => {
     if (!config || grid.length === 0) return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-900">Loading Systems...</div>;
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center pt-10 pb-10 px-4 font-sans select-none overflow-x-hidden">
-            <h1 className="text-4xl md:text-5xl font-black mb-2 text-emerald-500 tracking-tight">AstroPath</h1>
+        <div className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-10 pb-10 px-4 font-sans select-none overflow-x-hidden">
+            <h1 className="text-4xl md:text-5xl font-black mb-2 tracking-tight text-emerald-400 neon-text-emerald drop-shadow-lg w-full text-center">AstroPath</h1>
 
-            <div className="flex w-full max-w-2xl justify-between items-center bg-white shadow-sm p-4 rounded-2xl border border-slate-200 mb-8 backdrop-blur-sm">
+            <div className="flex w-full max-w-2xl justify-between items-center glass-panel p-4 rounded-3xl mb-8">
                 <div className="flex flex-col">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Level</span>
-                    <span className="text-2xl font-bold text-slate-800">{level}</span>
+                    <span className="text-2xl font-bold text-slate-100">{level}</span>
                 </div>
                 <div className="flex flex-col items-center">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Time</span>
-                    <span className={`text-3xl font-mono font-bold ${timeLeft <= 5 ? 'text-red-500 animate-pulse' : 'text-blue-500'}`}>
+                    <span className={`text-3xl font-mono font-bold ${timeLeft <= 5 ? 'text-rose-400 animate-pulse neon-text-rose' : 'text-cyan-400 neon-text-cyan'}`}>
                         00:{timeLeft.toString().padStart(2, '0')}
                     </span>
                 </div>
                 <div className="flex flex-col text-right">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Score</span>
-                    <span className="text-2xl font-bold text-slate-800">{score}</span>
+                    <span className="text-2xl font-bold text-slate-100">{score}</span>
                 </div>
             </div>
 
             {/* Game Grid Area */}
             {(gameState === 'PLAYING' || gameState === 'ANIMATING') && (
                 <div className="flex flex-col items-center mb-6">
-                    <div className="text-slate-500 text-sm font-medium mb-4 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm">
-                        Rotations used: <span className="text-slate-800 font-bold">{rotations}</span>
+                    <div className="text-slate-300 text-sm font-medium mb-4 glass-panel px-6 py-2 rounded-full shadow-sm tracking-wide">
+                        Rotations used: <span className="text-cyan-400 font-bold ml-1">{rotations}</span>
                     </div>
 
                     <div
-                        className="grid bg-white p-2 md:p-4 rounded-2xl border-2 border-slate-200 shadow-xl relative"
+                        className="grid glass-panel p-2 md:p-4 rounded-3xl border border-emerald-900/30 shadow-[0_0_40px_rgba(16,185,129,0.1)] relative"
                         style={{
                             gridTemplateColumns: `repeat(${config.width}, minmax(0, 1fr))`
                         }}
@@ -228,7 +228,7 @@ const AstroPath = () => {
                                         transform: `translate(-50%, -50%) rotate(${frame.deg}deg)`
                                     }}
                                 >
-                                    <RocketLogo className="w-full h-full drop-shadow-2xl text-emerald-300" />
+                                    <RocketLogo className="w-full h-full drop-shadow-[0_0_15px_rgba(52,211,153,0.8)] text-emerald-300" />
                                 </div>
                             );
                         })()}
@@ -241,34 +241,34 @@ const AstroPath = () => {
                                 return (
                                     <div
                                         key={`${x}-${y}`}
-                                        className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 m-1 rounded-xl flex items-center justify-center relative transition-all duration-300
-                                            ${cell.type === 'empty' ? 'bg-slate-50 border border-slate-100' : 'bg-slate-100 border-b-4 border-slate-300 cursor-pointer hover:bg-slate-200 active:border-b-0 active:translate-y-1'}
-                                            ${isStart ? 'ring-2 ring-emerald-500 ring-offset-2 ring-offset-white' : ''}
-                                            ${isEnd ? 'ring-2 ring-purple-500 ring-offset-2 ring-offset-white' : ''}
+                                        className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 m-1 rounded-2xl flex items-center justify-center relative transition-all duration-300
+                                            ${cell.type === 'empty' ? 'bg-slate-900/40 border border-slate-800/80' : 'glass-panel hover:bg-slate-800/60 border-b-4 border-cyan-900/50 hover:border-cyan-500/50 cursor-pointer active:border-b-0 active:translate-y-1'}
+                                            ${isStart ? 'ring-2 ring-emerald-400 ring-offset-4 ring-offset-slate-900 neon-glow-emerald' : ''}
+                                            ${isEnd ? 'ring-2 ring-purple-400 ring-offset-4 ring-offset-slate-900 neon-glow-purple' : ''}
                                         `}
                                         onClick={() => handleRotate(x, y)}
                                     >
                                         {/* Render Tile SVG based on type and rotation check */}
                                         {cell.type !== 'empty' && (
                                             <div
-                                                className="w-full h-full p-2 md:p-3 transition-transform duration-200"
+                                                className="w-full h-full p-2 md:p-3 transition-transform duration-200 drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]"
                                                 style={{ transform: `rotate(${cell.rotation * 90}deg)` }}
                                             >
-                                                {cell.type === 'straight' && <ChevronStraight className="w-full h-full text-emerald-500 opacity-90" />}
-                                                {cell.type === 'turnRight' && <ChevronTurnRight className="w-full h-full text-blue-500 opacity-90" />}
-                                                {cell.type === 'turnLeft' && <ChevronTurnLeft className="w-full h-full text-indigo-500 opacity-90" />}
+                                                {cell.type === 'straight' && <ChevronStraight className="w-full h-full text-emerald-400 opacity-90" />}
+                                                {cell.type === 'turnRight' && <ChevronTurnRight className="w-full h-full text-cyan-400 opacity-90" />}
+                                                {cell.type === 'turnLeft' && <ChevronTurnLeft className="w-full h-full text-purple-400 opacity-90" />}
                                             </div>
                                         )}
 
                                         {/* Overlays for Start/End */}
                                         {isStart && gameState !== 'ANIMATING' && (
                                             <div className="absolute -left-8 md:-left-12 z-10 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 pointer-events-none transform -rotate-90">
-                                                <RocketLogo className="w-full h-full drop-shadow-lg" />
+                                                <RocketLogo className="w-full h-full drop-shadow-[0_0_12px_rgba(52,211,153,0.5)]" />
                                             </div>
                                         )}
                                         {isEnd && (
                                             <div className="absolute -right-6 md:-right-10 z-10 w-10 h-10 md:w-14 md:h-14 pointer-events-none">
-                                                <PlanetLogo className="w-full h-full text-purple-400 drop-shadow-lg" />
+                                                <PlanetLogo className="w-full h-full text-purple-400 drop-shadow-[0_0_12px_rgba(192,132,252,0.5)]" />
                                             </div>
                                         )}
                                     </div>
@@ -281,40 +281,40 @@ const AstroPath = () => {
 
             {/* Win / Loss Screens */}
             {gameState === 'WIN' && (
-                <div className="flex flex-col items-center bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-100 text-center animate-in zoom-in duration-500 max-w-md w-full">
-                    <h2 className="text-4xl font-black text-emerald-500 mb-4">Connection Made!</h2>
-                    <p className="text-slate-500 mb-2 tracking-wide">You routed the rocket successfully.</p>
-                    <div className="bg-slate-50 border border-slate-100 p-4 rounded-xl w-full mb-8 font-mono space-y-2">
-                        <div className="flex justify-between text-sm"><span className="text-slate-500">Level Bonus:</span> <span className="text-emerald-500 font-bold">+{level * 1000}</span></div>
-                        <div className="flex justify-between text-sm"><span className="text-slate-500">Time Left ({timeLeft}s):</span> <span className="text-emerald-500 font-bold">+{timeLeft * 50}</span></div>
-                        <div className="flex justify-between text-sm"><span className="text-slate-500">Rotations ({rotations}):</span> <span className="text-red-500 font-bold">-{rotations * 10}</span></div>
+                <div className="flex flex-col items-center glass-panel border border-emerald-900/50 p-8 md:p-12 rounded-3xl text-center animate-in zoom-in duration-500 max-w-md w-full">
+                    <h2 className="text-5xl font-black text-emerald-400 mb-4 drop-shadow-md neon-text-emerald tracking-tight">Connection Made!</h2>
+                    <p className="text-slate-300 font-medium mb-4 tracking-wide">You routed the rocket successfully.</p>
+                    <div className="glass-panel p-6 rounded-2xl w-full mb-8 font-mono space-y-3">
+                        <div className="flex justify-between text-[15px]"><span className="text-slate-400">Level Bonus:</span> <span className="text-emerald-400 font-bold drop-shadow-sm">+{level * 1000}</span></div>
+                        <div className="flex justify-between text-[15px]"><span className="text-slate-400">Time Left ({timeLeft}s):</span> <span className="text-emerald-400 font-bold drop-shadow-sm">+{timeLeft * 50}</span></div>
+                        <div className="flex justify-between text-[15px]"><span className="text-slate-400">Rotations ({rotations}):</span> <span className="text-rose-400 font-bold drop-shadow-sm">-{rotations * 10}</span></div>
                     </div>
-                    <button onClick={nextLevel} className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-[0_10px_20px_rgba(16,185,129,0.2)] hover:-translate-y-1 mb-4 flex items-center justify-center">
+                    <button onClick={nextLevel} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-emerald-900/50 hover:-translate-y-1 mb-4 flex items-center justify-center">
                         Engage Thrusters <span className="ml-2 font-mono text-xl">→</span>
                     </button>
-                    <a href="/" className="w-full block bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center">
+                    <a href="/" className="w-full block bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center border">
                         Return to Hub
                     </a>
                 </div>
             )}
 
             {gameState === 'GAME_OVER' && (
-                <div className="flex flex-col items-center bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-100 text-center animate-in zoom-in duration-500 max-w-md w-full">
-                    <h2 className="text-4xl font-black text-red-500 mb-4">Signal Lost</h2>
-                    <p className="text-slate-500 mb-8 tracking-wide">The rocket ran out of fuel before reaching the destination.</p>
-                    <p className="text-2xl font-bold text-slate-800 mb-8">Final Score: {score}</p>
-                    <button onClick={restartGame} className="w-full bg-red-500 hover:bg-red-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-[0_10px_20px_rgba(239,68,68,0.2)] hover:-translate-y-1 mb-4 flex items-center justify-center">
+                <div className="flex flex-col items-center glass-panel border border-rose-900/50 p-8 md:p-12 rounded-3xl text-center animate-in zoom-in duration-500 max-w-md w-full">
+                    <h2 className="text-5xl font-black text-rose-500 mb-4 drop-shadow-md neon-text-rose tracking-tight">Signal Lost</h2>
+                    <p className="text-slate-400 font-medium mb-8 tracking-wide">The rocket ran out of fuel before reaching the destination.</p>
+                    <p className="text-2xl font-bold text-slate-100 mb-8">Final Score: {score}</p>
+                    <button onClick={restartGame} className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-rose-900/50 hover:-translate-y-1 mb-4 flex items-center justify-center">
                         Try Again <span className="ml-2 font-mono text-xl">↻</span>
                     </button>
-                    <a href="/" className="w-full block bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center">
+                    <a href="/" className="w-full block bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center border">
                         Return to Hub
                     </a>
                 </div>
             )}
 
             {gameState !== 'GAME_OVER' && gameState !== 'WIN' && (
-                <a href="/" className="text-slate-400 hover:text-slate-600 text-sm font-semibold transition-colors mt-auto pt-8">
-                    ← Back to Games
+                <a href="/" className="text-slate-400 hover:text-emerald-400 tracking-wide font-medium text-sm transition-colors mt-auto pt-8 flex items-center gap-1">
+                    <span>←</span> Back to Games
                 </a>
             )}
         </div>

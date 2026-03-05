@@ -192,33 +192,33 @@ const InvisibleMaze = () => {
     if (!config) return <div className="min-h-screen bg-slate-50 flex items-center justify-center">Loading...</div>;
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
-            <h1 className="text-4xl md:text-5xl font-black mb-2 tracking-tight text-slate-800">Invisible Maze</h1>
-            <p className="text-slate-500 font-medium mb-6 text-center max-w-lg">
+        <div className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
+            <h1 className="text-4xl md:text-5xl font-black mb-2 tracking-tight text-gradient-cyan neon-text-cyan drop-shadow-lg">Invisible Maze</h1>
+            <p className="text-slate-300 font-medium mb-6 text-center max-w-lg tracking-wide">
                 Memorize the hidden walls. Grab the Key, reach the Door. Hitting a wall resets you and drops the key!
             </p>
 
             {/* Dashboard */}
-            <div className="flex w-full max-w-xl justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-8">
+            <div className="flex w-full max-w-xl justify-between items-center glass-panel p-4 rounded-3xl mb-8">
                 <div className="flex flex-col">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Level</span>
-                    <span className="text-xl font-bold">{level}</span>
+                    <span className="text-xl font-bold text-slate-100">{level}</span>
                 </div>
                 <div className="flex flex-col items-center">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Time</span>
-                    <span className={`text-2xl font-mono font-bold ${timeLeft <= 5 ? 'text-red-500 animate-pulse' : 'text-blue-500'}`}>
+                    <span className={`text-2xl font-mono font-bold ${timeLeft <= 5 ? 'text-rose-400 animate-pulse neon-text-rose' : 'text-cyan-400 neon-text-cyan'}`}>
                         00:{timeLeft.toString().padStart(2, '0')}
                     </span>
                 </div>
                 <div className="flex flex-col items-center">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Inventory</span>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${hasKey ? 'bg-yellow-100' : 'bg-slate-100'}`}>
-                        {hasKey && <KeySVG className="w-6 h-6" />}
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors border ${hasKey ? 'bg-slate-800 border-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.3)]' : 'bg-slate-800/50 border-slate-700'}`}>
+                        {hasKey && <KeySVG className="w-6 h-6 drop-shadow-md" />}
                     </div>
                 </div>
                 <div className="flex flex-col text-right">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Score</span>
-                    <span className="text-xl font-bold">{score}</span>
+                    <span className="text-xl font-bold text-slate-100">{score}</span>
                 </div>
             </div>
 
@@ -226,7 +226,7 @@ const InvisibleMaze = () => {
             {(gameState === 'PLAYING') && (
                 <div className="flex flex-col items-center mb-6 relative">
                     <div
-                        className="bg-white p-2 rounded-xl shadow-lg border-2 border-slate-200 grid relative"
+                        className="glass-panel p-2 rounded-2xl border border-cyan-900/50 shadow-[0_0_30px_rgba(6,182,212,0.1)] grid relative"
                         style={{ gridTemplateColumns: `repeat(${config.width}, minmax(0, 1fr))` }}
                     >
                         {Array.from({ length: config.height }).map((_, y) => (
@@ -241,28 +241,28 @@ const InvisibleMaze = () => {
                                 return (
                                     <div
                                         key={`${x}-${y}`}
-                                        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 m-0.5 rounded-lg flex items-center justify-center relative bg-slate-50"
+                                        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 m-0.5 rounded-xl flex items-center justify-center relative bg-slate-900/60 border border-slate-800/50 overflow-hidden"
                                     >
                                         {/* Board Entities */}
-                                        {isDoor && <DoorSVG className="w-10 h-10 sm:w-14 sm:h-14 opacity-90" />}
-                                        {isKey && <KeySVG className="w-10 h-10 sm:w-14 sm:h-14 animate-bounce" />}
+                                        {isDoor && <DoorSVG className="w-10 h-10 sm:w-14 sm:h-14 opacity-90 drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]" />}
+                                        {isKey && <KeySVG className="w-10 h-10 sm:w-14 sm:h-14 animate-bounce drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" />}
 
                                         {/* Player */}
                                         {isPlayer && (
-                                            <div className="absolute inset-0 flex items-center justify-center z-10 transition-transform duration-200">
-                                                <PlayerSVG className="w-12 h-12 sm:w-16 sm:h-16 drop-shadow-md" />
+                                            <div className="absolute inset-0 flex items-center justify-center z-10 transition-transform duration-200 drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]">
+                                                <PlayerSVG className="w-12 h-12 sm:w-16 sm:h-16" />
                                             </div>
                                         )}
 
                                         {/* Hit Wall Animation Overlay */}
-                                        {isHitHere && hitWall.dir === 'up' && <div className="absolute top-0 left-0 right-0 h-2 bg-red-500 animate-pulse z-20 rounded-t-lg" />}
-                                        {isHitHere && hitWall.dir === 'right' && <div className="absolute top-0 right-0 bottom-0 w-2 bg-red-500 animate-pulse z-20 rounded-r-lg" />}
-                                        {isHitHere && hitWall.dir === 'down' && <div className="absolute bottom-0 left-0 right-0 h-2 bg-red-500 animate-pulse z-20 rounded-b-lg" />}
-                                        {isHitHere && hitWall.dir === 'left' && <div className="absolute top-0 left-0 bottom-0 w-2 bg-red-500 animate-pulse z-20 rounded-l-lg" />}
+                                        {isHitHere && hitWall.dir === 'up' && <div className="absolute top-0 left-0 right-0 h-2 bg-rose-500 neon-glow-rose animate-pulse z-20" />}
+                                        {isHitHere && hitWall.dir === 'right' && <div className="absolute top-0 right-0 bottom-0 w-2 bg-rose-500 neon-glow-rose animate-pulse z-20" />}
+                                        {isHitHere && hitWall.dir === 'down' && <div className="absolute bottom-0 left-0 right-0 h-2 bg-rose-500 neon-glow-rose animate-pulse z-20" />}
+                                        {isHitHere && hitWall.dir === 'left' && <div className="absolute top-0 left-0 bottom-0 w-2 bg-rose-500 neon-glow-rose animate-pulse z-20" />}
 
                                         {/* DEV CHEAT: uncomment to see hidden walls */}
-                                        {/* {config.verticalWalls.has(`${x},${y}`) && <div className="absolute right-0 top-0 bottom-0 w-1 bg-slate-300 z-0" />} */}
-                                        {/* {config.horizontalWalls.has(`${x},${y}`) && <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-300 z-0" />} */}
+                                        {/* {config.verticalWalls.has(`${x},${y}`) && <div className="absolute right-0 top-0 bottom-0 w-1 bg-slate-700 z-0" />} */}
+                                        {/* {config.horizontalWalls.has(`${x},${y}`) && <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-700 z-0" />} */}
                                     </div>
                                 );
                             })
@@ -272,31 +272,31 @@ const InvisibleMaze = () => {
                     {/* Mobile Controls */}
                     <div className="md:hidden grid grid-cols-3 gap-2 mt-8 w-48 mx-auto">
                         <div />
-                        <button onClick={() => handleMove(0, -1)} className="bg-slate-200 hover:bg-slate-300 rounded-xl p-4 flex justify-center active:scale-95 transition-transform text-slate-600">▲</button>
+                        <button onClick={() => handleMove(0, -1)} className="glass-panel text-slate-300 hover:text-cyan-400 rounded-xl p-4 flex justify-center active:scale-95 transition-transform hover:shadow-cyan-900/50 hover:border-cyan-500/50">▲</button>
                         <div />
-                        <button onClick={() => handleMove(-1, 0)} className="bg-slate-200 hover:bg-slate-300 rounded-xl p-4 flex justify-center active:scale-95 transition-transform text-slate-600">◀</button>
-                        <button onClick={() => handleMove(0, 1)} className="bg-slate-200 hover:bg-slate-300 rounded-xl p-4 flex justify-center active:scale-95 transition-transform text-slate-600">▼</button>
-                        <button onClick={() => handleMove(1, 0)} className="bg-slate-200 hover:bg-slate-300 rounded-xl p-4 flex justify-center active:scale-95 transition-transform text-slate-600">▶</button>
+                        <button onClick={() => handleMove(-1, 0)} className="glass-panel text-slate-300 hover:text-cyan-400 rounded-xl p-4 flex justify-center active:scale-95 transition-transform hover:shadow-cyan-900/50 hover:border-cyan-500/50">◀</button>
+                        <button onClick={() => handleMove(0, 1)} className="glass-panel text-slate-300 hover:text-cyan-400 rounded-xl p-4 flex justify-center active:scale-95 transition-transform hover:shadow-cyan-900/50 hover:border-cyan-500/50">▼</button>
+                        <button onClick={() => handleMove(1, 0)} className="glass-panel text-slate-300 hover:text-cyan-400 rounded-xl p-4 flex justify-center active:scale-95 transition-transform hover:shadow-cyan-900/50 hover:border-cyan-500/50">▶</button>
                     </div>
                 </div>
             )}
 
             {/* Win Screen */}
             {gameState === 'WIN' && (
-                <div className="flex flex-col items-center bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-100 text-center animate-in zoom-in duration-500 max-w-md w-full">
-                    <h2 className="text-4xl font-black text-blue-500 mb-4">Escaped!</h2>
-                    <p className="text-slate-500 mb-8 tracking-wide">You memorized the labyrinth.</p>
+                <div className="flex flex-col items-center glass-panel border border-cyan-500/30 p-8 md:p-12 rounded-3xl text-center animate-in zoom-in duration-500 max-w-md w-full">
+                    <h2 className="text-5xl font-black text-cyan-400 mb-4 drop-shadow-md neon-text-cyan tracking-tight">Escaped!</h2>
+                    <p className="text-slate-300 font-medium mb-8 tracking-wide">You memorized the labyrinth.</p>
 
                     <button
                         onClick={() => {
                             setLevel(l => l + 1);
                             setGameState('START');
                         }}
-                        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-[0_10px_20px_rgba(59,130,246,0.2)] hover:-translate-y-1 mb-4 flex items-center justify-center"
+                        className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-lg shadow-cyan-900/50 hover:-translate-y-1 mb-4 flex items-center justify-center"
                     >
-                        Next Floor <span className="ml-2">→</span>
+                        Next Floor <span className="ml-2 font-mono">→</span>
                     </button>
-                    <a href="/" className="w-full block bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center">
+                    <a href="/" className="w-full block bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center">
                         Return to Hub
                     </a>
                 </div>
@@ -304,10 +304,10 @@ const InvisibleMaze = () => {
 
             {/* Loss Screen */}
             {gameState === 'GAME_OVER' && (
-                <div className="flex flex-col items-center bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-100 text-center animate-in zoom-in duration-500 max-w-md w-full">
-                    <h2 className="text-4xl font-black text-red-500 mb-4">Trapped</h2>
-                    <p className="text-slate-500 mb-6">Time ran out.</p>
-                    <p className="text-2xl font-bold text-slate-800 mb-8">Final Score: {score}</p>
+                <div className="flex flex-col items-center glass-panel p-8 md:p-12 border border-rose-900/50 rounded-3xl text-center animate-in zoom-in duration-500 max-w-md w-full">
+                    <h2 className="text-5xl font-black text-rose-500 mb-4 drop-shadow-md neon-text-rose tracking-tight">Trapped</h2>
+                    <p className="text-slate-400 font-medium mb-6 tracking-wide">Time ran out.</p>
+                    <p className="text-2xl font-bold text-slate-100 mb-8 tracking-tight">Final Score: {score}</p>
 
                     <button
                         onClick={() => {
@@ -315,19 +315,19 @@ const InvisibleMaze = () => {
                             setScore(0);
                             setGameState('START');
                         }}
-                        className="w-full bg-red-500 hover:bg-red-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-[0_10px_20px_rgba(239,68,68,0.2)] hover:-translate-y-1 mb-4 flex items-center justify-center"
+                        className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all shadow-lg shadow-rose-900/50 hover:-translate-y-1 mb-4 flex items-center justify-center"
                     >
                         Try Again <span className="ml-2">↻</span>
                     </button>
-                    <a href="/" className="w-full block bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center">
+                    <a href="/" className="w-full block bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 font-semibold px-8 py-3 rounded-xl transition-colors mt-2 text-center">
                         Return to Hub
                     </a>
                 </div>
             )}
 
             {gameState !== 'WIN' && gameState !== 'GAME_OVER' && (
-                <a href="/" className="text-slate-400 hover:text-slate-600 text-sm font-semibold transition-colors mt-auto pt-8">
-                    ← Back to Games
+                <a href="/" className="text-slate-400 hover:text-cyan-400 tracking-wide text-sm font-semibold transition-colors mt-auto pt-8 flex items-center gap-1">
+                    <span>←</span> Back to Games
                 </a>
             )}
         </div>

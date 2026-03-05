@@ -6,7 +6,7 @@ const SoundToggle = () => {
     return (
         <button
             onClick={toggleSound}
-            className="fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-white shadow-lg border border-slate-200 flex items-center justify-center hover:shadow-xl hover:scale-105 transition-all duration-200 group"
+            className="fixed top-4 right-4 z-50 w-12 h-12 rounded-full glass-panel glass-panel-hover flex items-center justify-center transition-all duration-300 group"
             title={soundEnabled ? 'Mute sounds' : 'Unmute sounds'}
         >
             {soundEnabled ? (

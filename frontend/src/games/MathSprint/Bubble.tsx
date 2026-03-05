@@ -17,17 +17,17 @@ const Bubble = ({ item, handleClick, selectedOrder, roundState }: BubbleProps) =
     const isChosenIndexCorrect = chosenIndex === item.sortedIndex;
 
     // Determine colors based on state
-    let bgClass = "bg-white border-slate-200 text-slate-800 hover:border-blue-400 hover:shadow-md"; // Default unselected
+    let bgClass = "glass-panel text-slate-100 hover:border-cyan-500/50 glass-panel-hover"; // Default unselected
 
     if (roundState === 'PLAYING') {
         if (chosenIndex !== null) {
-            bgClass = "bg-blue-50 border-blue-400 text-blue-900 shadow-sm scale-95"; // Selected
+            bgClass = "bg-cyan-900/60 border-cyan-400 text-cyan-50 neon-glow-cyan scale-[0.98]"; // Selected
         }
     } else if (roundState === 'RESULT') {
         if (isChosenIndexCorrect) {
-            bgClass = "bg-green-500 border-green-600 text-white shadow-md"; // Correct!
+            bgClass = "bg-emerald-900/60 border-emerald-400 text-emerald-50 neon-glow-emerald"; // Correct!
         } else {
-            bgClass = "bg-red-500 border-red-600 text-white shadow-md"; // Wrong / Missed
+            bgClass = "bg-rose-900/60 border-rose-400 text-rose-50 neon-glow-rose"; // Wrong / Missed
         }
     }
 
@@ -37,20 +37,20 @@ const Bubble = ({ item, handleClick, selectedOrder, roundState }: BubbleProps) =
 
     return (
         <div
-            className={`relative w-40 h-40 border-2 ${bgClass} flex flex-col justify-center items-center rounded-2xl cursor-pointer transition-all duration-300 select-none shadow-sm`}
+            className={`relative w-40 h-40 border transition-all duration-300 ${bgClass} flex flex-col justify-center items-center rounded-2xl cursor-pointer select-none`}
             onClick={handleOnClick}
         >
-            <span className="text-3xl font-extrabold mb-1 tracking-tight">{item.expression}</span>
-            <span className="text-sm font-semibold opacity-90 mt-1">
+            <span className="text-3xl font-extrabold mb-1 tracking-tight drop-shadow-md">{item.expression}</span>
+            <span className={`text-sm font-semibold mt-1 ${roundState === 'RESULT' ? 'opacity-100' : 'opacity-70'}`}>
                 {roundState === 'RESULT' ? `= ${item.value}` : (chosenIndex === null ? 'Tap to order' : '')}
             </span>
 
             {/* Display Badge (Show if selected in PLAYING, always show sortedIndex in RESULT) */}
             {(chosenIndex !== null || roundState === 'RESULT') && (
-                <div className={`absolute -top-4 -right-4 w-11 h-11 rounded-full flex justify-center items-center border-2 font-black text-xl z-10 transition-transform duration-300 ${roundState === 'RESULT' ? 'scale-110' : ''}
-                    ${roundState === 'RESULT' && !isChosenIndexCorrect ? 'bg-white text-red-600 border-red-200 shadow-md' :
-                        roundState === 'RESULT' && isChosenIndexCorrect ? 'bg-white text-green-600 border-green-200 shadow-md' :
-                            'bg-blue-600 text-white border-blue-700 shadow'}
+                <div className={`absolute -top-4 -right-4 w-11 h-11 rounded-full flex justify-center items-center border font-black text-xl z-10 transition-transform duration-300 drop-shadow-lg ${roundState === 'RESULT' ? 'scale-110' : ''}
+                    ${roundState === 'RESULT' && !isChosenIndexCorrect ? 'bg-rose-600 text-white border-rose-300 neon-glow-rose' :
+                        roundState === 'RESULT' && isChosenIndexCorrect ? 'bg-emerald-500 text-white border-emerald-200 neon-glow-emerald' :
+                            'bg-cyan-600 text-white border-cyan-300 neon-glow-cyan'}
                 `}>
                     {roundState === 'RESULT' ? item.sortedIndex : chosenIndex}
                 </div>
