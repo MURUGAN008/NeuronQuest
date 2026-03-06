@@ -40,6 +40,14 @@ const Games = () => {
             image: dualNBackThumb
         },
         {
+            id: '2048',
+            title: '2048',
+            description: 'Swipe, merge, and reach the final tile while dodging asteroids',
+            color: 'from-cyan-500 to-blue-600',
+            neon: 'shadow-[0_0_20px_rgba(6,182,212,0.4)] border-cyan-500/50',
+            path: '/2048'
+        },
+        {
             id: 'sequence-memory',
             title: 'Sequence Memory',
             description: 'Test your working memory by perfectly recalling sequences of numbers and letters.',
@@ -54,7 +62,7 @@ const Games = () => {
             <div className="max-w-5xl w-full">
                 <div className="mb-16 text-center">
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-gradient-cyan neon-text-cyan drop-shadow-lg">
-                        NeuronQuest
+                        CortexPlay
                     </h1>
                     <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium">
                         Sharpen your mind with our premium cognitive training platform.

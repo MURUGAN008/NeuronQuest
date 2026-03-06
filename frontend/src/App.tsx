@@ -5,6 +5,7 @@ import AstroPath from './games/AstroPath/AstroPath'
 import InvisibleMaze from './games/InvisibleMaze/InvisibleMaze'
 import DualNBack from './games/DualNBack/DualNBack';
 import SequenceMemory from './games/SequenceMemory/SequenceMemory';
+import Game2048 from './games/Game2048/Game2048';
 import Games from './pages/Games'
 import { SoundProvider } from './context/SoundContext'
 import SoundToggle from './components/SoundToggle'
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/invisible-maze" element={<InvisibleMaze />} />
         <Route path="/dual-n-back" element={<DualNBack />} />
         <Route path="/sequence-memory" element={<SequenceMemory />} />
+        <Route path="/2048" element={<Game2048 />} />
       </Routes>
     </SoundProvider>
   )
