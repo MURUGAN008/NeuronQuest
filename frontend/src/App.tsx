@@ -10,7 +10,7 @@ import Games from './pages/Games'
 import { SoundProvider } from './context/SoundContext'
 import SoundToggle from './components/SoundToggle'
 import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const App = () => {
   return (
