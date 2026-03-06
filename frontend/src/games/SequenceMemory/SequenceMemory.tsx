@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { generateSequence, type SequenceMode } from './SequenceEngine';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
+import SEO from '../../components/SEO';
 
 const INITIAL_SEQUENCE_LENGTH = 3;
 const DISPLAY_DURATION_MS = 1000; // How long each item shows
@@ -193,14 +194,15 @@ const SequenceMemory = () => {
     // ============================================
 
     return (
-        <div className="min-h-screen bg-transparent flex flex-col items-center pt-20 pb-10 px-4">
+        <main className="min-h-screen bg-transparent flex flex-col items-center pt-20 pb-10 px-4">
+            <SEO title="Sequence Memory | CortexPlay" description="Test your cognitive memory limits with Sequence Memory." />
             <h1 className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight text-gradient-cyan neon-text-cyan drop-shadow-lg">Sequence Memory</h1>
 
             {(gameState !== 'START' && gameState !== 'GAME_OVER') && (
-                <div className="mb-8 flex flex-col items-center">
+                <header className="mb-8 flex flex-col items-center">
                     <p className="text-xl text-slate-300 font-medium mb-1">Level {level}</p>
                     <p className="text-lg font-bold text-cyan-400 mb-3 tracking-wide neon-text-cyan">SCORE: {score}</p>
-                </div>
+                </header>
             )}
 
             {gameState === 'START' && (
@@ -328,7 +330,7 @@ const SequenceMemory = () => {
                 );
             })()}
 
-        </div>
+        </main>
     );
 };
 

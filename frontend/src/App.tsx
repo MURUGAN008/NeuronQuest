@@ -9,7 +9,7 @@ import Game2048 from './games/Game2048/Game2048';
 import Games from './pages/Games'
 import { SoundProvider } from './context/SoundContext'
 import SoundToggle from './components/SoundToggle'
-
+import { Analytics } from "@vercel/analytics/react"
 const App = () => {
   return (
     <SoundProvider>
@@ -23,6 +23,7 @@ const App = () => {
         <Route path="/sequence-memory" element={<SequenceMemory />} />
         <Route path="/2048" element={<Game2048 />} />
       </Routes>
+      <Analytics />
     </SoundProvider>
   )
 }

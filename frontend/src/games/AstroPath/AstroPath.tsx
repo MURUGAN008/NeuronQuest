@@ -10,6 +10,7 @@ import ChevronTurnRight from './components/ChevronTurnRight';
 import ChevronTurnLeft from './components/ChevronTurnLeft';
 import RocketLogo from './components/RocketLogo';
 import PlanetLogo from './components/PlanetLogo';
+import SEO from '../../components/SEO';
 
 // Hook for the timer
 function useTimer(initialTime: number) {
@@ -180,10 +181,11 @@ const AstroPath = () => {
     if (!config || grid.length === 0) return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-900">Loading Systems...</div>;
 
     return (
-        <div className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-10 pb-10 px-4 font-sans select-none overflow-x-hidden">
+        <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-10 pb-10 px-4 font-sans select-none overflow-x-hidden">
+            <SEO title="AstroPath | CortexPlay" description="Connect the nodes and chart a course through the stars in AstroPath." />
             <h1 className="text-4xl md:text-5xl font-black mb-2 tracking-tight text-emerald-400 neon-text-emerald drop-shadow-lg w-full text-center">AstroPath</h1>
 
-            <div className="flex w-full max-w-2xl justify-between items-center glass-panel p-4 rounded-3xl mb-8">
+            <header className="flex w-full max-w-2xl justify-between items-center glass-panel p-4 rounded-3xl mb-8">
                 <div className="flex flex-col">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Level</span>
                     <span className="text-2xl font-bold text-slate-100">{level}</span>
@@ -198,11 +200,11 @@ const AstroPath = () => {
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Score</span>
                     <span className="text-2xl font-bold text-slate-100">{score}</span>
                 </div>
-            </div>
+            </header>
 
             {/* Game Grid Area */}
             {(gameState === 'PLAYING' || gameState === 'ANIMATING') && (
-                <div className="flex flex-col items-center mb-6">
+                <section className="flex flex-col items-center mb-6" aria-label="Game Board">
                     <div className="text-slate-300 text-sm font-medium mb-4 glass-panel px-6 py-2 rounded-full shadow-sm tracking-wide">
                         Rotations used: <span className="text-cyan-400 font-bold ml-1">{rotations}</span>
                     </div>
@@ -276,7 +278,7 @@ const AstroPath = () => {
                             })
                         ))}
                     </div>
-                </div>
+                </section>
             )}
 
             {/* Win / Loss Screens */}
@@ -317,7 +319,7 @@ const AstroPath = () => {
                     <span>←</span> Back to Games
                 </a>
             )}
-        </div>
+        </main>
     );
 };
 

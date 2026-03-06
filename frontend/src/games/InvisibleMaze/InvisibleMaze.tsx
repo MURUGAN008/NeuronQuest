@@ -3,6 +3,7 @@ import { generateMaze } from './MazeGenerator';
 import type { MazeConfig, Point } from './MazeGenerator';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
+import SEO from '../../components/SEO';
 
 // Use clear visual SVGs for Key, Door, Player
 const PlayerSVG = ({ className }: { className?: string }) => (
@@ -192,14 +193,15 @@ const InvisibleMaze = () => {
     if (!config) return <div className="min-h-screen bg-slate-50 flex items-center justify-center">Loading...</div>;
 
     return (
-        <div className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
+        <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
+            <SEO title="Invisible Maze | CortexPlay" description="Memorize the hidden walls and navigate the Invisible Maze." />
             <h1 className="text-4xl md:text-5xl font-black mb-2 tracking-tight text-gradient-cyan neon-text-cyan drop-shadow-lg">Invisible Maze</h1>
             <p className="text-slate-300 font-medium mb-6 text-center max-w-lg tracking-wide">
                 Memorize the hidden walls. Grab the Key, reach the Door. Hitting a wall resets you and drops the key!
             </p>
 
             {/* Dashboard */}
-            <div className="flex w-full max-w-xl justify-between items-center glass-panel p-4 rounded-3xl mb-8">
+            <header className="flex w-full max-w-xl justify-between items-center glass-panel p-4 rounded-3xl mb-8">
                 <div className="flex flex-col">
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Level</span>
                     <span className="text-xl font-bold text-slate-100">{level}</span>
@@ -220,11 +222,11 @@ const InvisibleMaze = () => {
                     <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Score</span>
                     <span className="text-xl font-bold text-slate-100">{score}</span>
                 </div>
-            </div>
+            </header>
 
             {/* Game Area */}
             {(gameState === 'PLAYING') && (
-                <div className="flex flex-col items-center mb-6 relative">
+                <section className="flex flex-col items-center mb-6 relative" aria-label="Game Board">
                     <div
                         className="glass-panel p-2 rounded-2xl border border-cyan-900/50 shadow-[0_0_30px_rgba(6,182,212,0.1)] grid relative"
                         style={{ gridTemplateColumns: `repeat(${config.width}, minmax(0, 1fr))` }}
@@ -278,7 +280,7 @@ const InvisibleMaze = () => {
                         <button onClick={() => handleMove(0, 1)} className="glass-panel text-slate-300 hover:text-cyan-400 rounded-xl p-4 flex justify-center active:scale-95 transition-transform hover:shadow-cyan-900/50 hover:border-cyan-500/50">▼</button>
                         <button onClick={() => handleMove(1, 0)} className="glass-panel text-slate-300 hover:text-cyan-400 rounded-xl p-4 flex justify-center active:scale-95 transition-transform hover:shadow-cyan-900/50 hover:border-cyan-500/50">▶</button>
                     </div>
-                </div>
+                </section>
             )}
 
             {/* Win Screen */}
@@ -330,7 +332,7 @@ const InvisibleMaze = () => {
                     <span>←</span> Back to Games
                 </a>
             )}
-        </div>
+        </main>
     );
 };
 

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { generateNBackSequence, type Trial } from './NBackEngine';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
+import SEO from '../../components/SEO';
 
 const TRIAL_DURATION = 3000;
 const STIMULUS_DURATION = 2000;
@@ -218,9 +219,9 @@ const DualNBack = () => {
         setGameState('START');
     };
 
-    // --- Renders ---
     return (
-        <div className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
+        <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
+            <SEO title="Dual N-Back | CortexPlay" description="Expand your fluid intelligence and working memory with Dual N-Back." />
             <h1 className="text-4xl md:text-5xl font-black mb-2 text-indigo-400 neon-text-indigo drop-shadow-lg tracking-tight">Dual N-Back</h1>
             <p className="text-slate-300 mb-8 max-w-md text-center tracking-wide">
                 Mental training to expand fluid intelligence and working memory capacity.
@@ -301,8 +302,8 @@ const DualNBack = () => {
             )}
 
             {gameState === 'PLAYING' && (
-                <div className="flex flex-col items-center w-full max-w-lg">
-                    <div className="flex w-full justify-between items-center glass-panel shadow-sm p-4 rounded-3xl mb-8">
+                <section className="flex flex-col items-center w-full max-w-lg" aria-label="Game Board">
+                    <header className="flex w-full justify-between items-center glass-panel shadow-sm p-4 rounded-3xl mb-8">
                         <div className="flex flex-col">
                             <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Target</span>
                             <span className="text-2xl font-black text-indigo-400 drop-shadow-sm">{nBackLevel}-Back</span>
@@ -311,7 +312,7 @@ const DualNBack = () => {
                             <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">Progress</span>
                             <span className="text-2xl font-bold text-slate-100">{currentTrialIndex + 1} / {sequence.length}</span>
                         </div>
-                    </div>
+                    </header>
 
                     {/* 3x3 Grid — fixed size */}
                     <div className="grid grid-cols-3 grid-rows-3 gap-3 p-5 glass-panel rounded-3xl shadow-[0_0_30px_rgba(99,102,241,0.1)] border border-indigo-900/30 mb-10 w-[320px] h-[320px] md:w-[400px] md:h-[400px]">
@@ -366,7 +367,7 @@ const DualNBack = () => {
                             <span className="text-sm font-semibold text-slate-400 border border-slate-700 rounded px-2 bg-slate-900/50">(L)</span>
                         </button>
                     </div>
-                </div>
+                </section>
             )}
 
             {gameState === 'RESULT' && (() => {
@@ -459,7 +460,7 @@ const DualNBack = () => {
                     </div>
                 );
             })()}
-        </div>
+        </main>
     );
 };
 

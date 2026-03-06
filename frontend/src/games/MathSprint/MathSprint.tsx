@@ -6,6 +6,7 @@ import ShowTime from "./ShowTime";
 import useTimer from "../../hooks/useTimer";
 import { useSoundEnabled } from "../../context/SoundContext";
 import { playFailSound } from "../../utils/sounds";
+import SEO from "../../components/SEO";
 
 const MathSprint = () => {
     const { soundEnabled } = useSoundEnabled();
@@ -96,14 +97,15 @@ const MathSprint = () => {
     };
 
     return (
-        <div className="min-h-screen bg-transparent flex flex-col items-center pt-20 pb-10 px-4">
+        <main className="min-h-screen bg-transparent flex flex-col items-center pt-20 pb-10 px-4">
+            <SEO title="Math Sprint | CortexPlay" description="Race against the clock to solve math sequences in Math Sprint." />
             <h1 className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight text-gradient-cyan neon-text-cyan drop-shadow-lg">Math Sprint</h1>
             {roundState !== 'GAME_OVER' && (
-                <div className="mb-8 flex flex-col items-center">
+                <header className="mb-8 flex flex-col items-center">
                     <p className="text-xl text-slate-300 font-medium mb-1">Level {level} / 10</p>
                     <p className="text-lg font-bold text-cyan-400 mb-3 tracking-wide neon-text-cyan">SCORE: {score}</p>
                     <ShowTime timeLeft={timeLeft} />
-                </div>
+                </header>
             )}
 
             {roundState === 'GAME_OVER' ? (() => {
@@ -162,7 +164,7 @@ const MathSprint = () => {
                     )}
                 </>
             )}
-        </div>
+        </main>
     );
 }
 

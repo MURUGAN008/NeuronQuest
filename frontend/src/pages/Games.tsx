@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import SEO from '../components/SEO';
 import mathSprintThumb from '../assets/mathsprint-thumb.png';
 import astropathThumb from '../assets/astropath-thumb.png';
 import invisibleMazeThumb from '../assets/invisiblemaze-thumb.png';
 import dualNBackThumb from '../assets/dualnback-thumb.png';
 import sequenceMemoryThumb from '../assets/sequencememory-thumb.png';
+import Game2048Thumb from '../assets/2048-thumb.png';
 
 const Games = () => {
     const games = [
@@ -43,9 +45,9 @@ const Games = () => {
             id: '2048',
             title: '2048',
             description: 'Swipe, merge, and reach the final tile while dodging asteroids',
-            color: 'from-cyan-500 to-blue-600',
-            neon: 'shadow-[0_0_20px_rgba(6,182,212,0.4)] border-cyan-500/50',
-            path: '/2048'
+            color: 'bg-cyan-500',
+            path: '/2048',
+            image: Game2048Thumb
         },
         {
             id: 'sequence-memory',
@@ -58,18 +60,22 @@ const Games = () => {
     ];
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-6 bg-transparent">
+        <main className="min-h-screen flex items-center justify-center p-6 bg-transparent">
+            <SEO
+                title="CortexPlay | Premium Brain Training Games"
+                description="Elevate your mind with CortexPlay. Play immersive brain training games designed to improve memory, spatial reasoning, focus, and reaction speed."
+            />
             <div className="max-w-5xl w-full">
-                <div className="mb-16 text-center">
+                <header className="mb-16 text-center">
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-gradient-cyan neon-text-cyan drop-shadow-lg">
                         CortexPlay
                     </h1>
                     <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium">
                         Sharpen your mind with our premium cognitive training platform.
                     </p>
-                </div>
+                </header>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label="Game Selection">
                     {games.map((game) => (
                         <Link
                             key={game.id}
@@ -103,9 +109,9 @@ const Games = () => {
                             </div>
                         </Link>
                     ))}
-                </div>
+                </section>
             </div>
-        </div>
+        </main>
     )
 }
 

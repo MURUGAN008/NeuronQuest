@@ -11,6 +11,7 @@ import {
 } from './Game2048Logic';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
+import SEO from '../../components/SEO';
 
 const Game2048 = () => {
     const { soundEnabled } = useSoundEnabled();
@@ -182,9 +183,13 @@ const Game2048 = () => {
     };
 
     return (
-        <div className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
+        <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
+            <SEO
+                title="2048 | CortexPlay"
+                description="Play 2048 neon edition on CortexPlay. Swipe, merge tiles, and test your logic while dodging asteroids in this premium puzzle game."
+            />
             {/* Header */}
-            <div className="w-full max-w-lg flex justify-between items-end mb-8">
+            <header className="w-full max-w-lg flex justify-between items-end mb-8">
                 <div>
                     <h1 className="text-5xl font-black mb-1 text-cyan-400 neon-text-cyan drop-shadow-lg tracking-tight">2048</h1>
                     <p className="text-slate-400 text-sm font-semibold tracking-wide">Level {level} • Target: {config.winScore}</p>
@@ -199,10 +204,10 @@ const Game2048 = () => {
                         <span className="text-xl font-black text-slate-200">{bestScore}</span>
                     </div>
                 </div>
-            </div>
+            </header>
 
             {/* Main Game Area */}
-            <div className="relative w-full max-w-lg">
+            <section className="relative w-full max-w-lg" aria-label="Game Board">
 
                 {/* 
                     The grid container 
@@ -266,23 +271,23 @@ const Game2048 = () => {
                         </div>
                     </div>
                 )}
-            </div>
+            </section>
 
             {/* Instructions */}
-            <div className="mt-8 text-center text-slate-500 text-sm max-w-sm">
+            <section className="mt-8 text-center text-slate-500 text-sm max-w-sm" aria-label="Instructions">
                 <p>Join the numbers and get to the <strong className="text-cyan-400">{config.winScore}</strong> tile to level up!</p>
                 <p className="mt-2 text-xs">Use <strong className="text-slate-400">arrow keys</strong>, <strong className="text-slate-400">WASD</strong>, or <strong className="text-slate-400">swipe</strong> to move tiles.</p>
                 {config.obstacles > 0 && (
                     <p className="mt-2 text-xs text-rose-400/80">Watch out for the asteroid obstacles (☄️)! Tiles cannot move through them.</p>
                 )}
-            </div>
+            </section>
 
             {gameState === 'PLAYING' && (
                 <a href="/" className="mt-8 text-slate-500 hover:text-slate-300 text-sm font-semibold transition-colors">
                     ← Back to Menu
                 </a>
             )}
-        </div>
+        </main>
     );
 };
 
