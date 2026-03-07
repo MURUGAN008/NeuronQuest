@@ -3,6 +3,7 @@ import { generateNBackSequence, type Trial } from './NBackEngine';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
 import SEO from '../../components/SEO';
+import GameSEOContent from '../../components/GameSEOContent';
 
 const TRIAL_DURATION = 3000;
 const STIMULUS_DURATION = 2000;
@@ -221,7 +222,25 @@ const DualNBack = () => {
 
     return (
         <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
-            <SEO title="Dual N-Back | CortexPlay" description="Expand your fluid intelligence and working memory with Dual N-Back." />
+            <SEO
+                title="Dual N-Back – Free Working Memory Training Game Online | CortexPlay"
+                description="Play Dual N-Back free online. The gold standard of cognitive training to improve fluid intelligence and working memory. Adaptive difficulty. Backed by neuroscience research. No download required."
+                url="https://cortexplay.games/dual-n-back"
+                keywords="dual n-back online, working memory training, fluid intelligence, n-back game free, cognitive training game, brain training exercise, memory improvement game"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "VideoGame",
+                    "name": "Dual N-Back",
+                    "url": "https://cortexplay.games/dual-n-back",
+                    "description": "The gold standard working memory training game. Track visual and audio sequences to improve fluid intelligence.",
+                    "genre": "Brain Training",
+                    "gamePlatform": "Web Browser",
+                    "applicationCategory": "Game",
+                    "operatingSystem": "Any",
+                    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                    "publisher": { "@type": "Organization", "name": "CortexPlay", "url": "https://cortexplay.games" }
+                }}
+            />
             <h1 className="text-4xl md:text-5xl font-black mb-2 text-indigo-400 neon-text-indigo drop-shadow-lg tracking-tight">Dual N-Back</h1>
             <p className="text-slate-300 mb-8 max-w-md text-center tracking-wide">
                 Mental training to expand fluid intelligence and working memory capacity.
@@ -460,6 +479,29 @@ const DualNBack = () => {
                     </div>
                 );
             })()}
+
+            <GameSEOContent
+                title="Dual N-Back"
+                sections={[
+                    {
+                        heading: 'What is Dual N-Back?',
+                        content: 'Dual N-Back is widely considered the gold standard of cognitive training exercises for improving working memory and fluid intelligence. In this game, you are presented with a 3x3 grid where a blue square flashes in different positions while a letter is simultaneously spoken aloud. Your task is to press the Visual Match button when the current square position matches the position from N steps ago, and press the Audio Match button when the current spoken letter matches the letter from N steps ago. The "N" in N-Back refers to how many steps back you need to remember, starting at 1-Back and increasing as your accuracy improves.'
+                    },
+                    {
+                        heading: 'Adaptive Difficulty System',
+                        content: 'The Dual N-Back training on CortexPlay uses an adaptive difficulty system based on your performance. If your overall accuracy exceeds 70 percent, you advance to the next N-Back level, making the task harder by requiring you to remember positions and letters from further back in the sequence. If your accuracy falls between 50 and 69 percent, you stay at the current level for additional practice. If your accuracy drops below 50 percent, you drop back one level to rebuild your skills. This adaptive system ensures you are always training at the edge of your ability, which research shows is the most effective zone for cognitive improvement.'
+                    },
+                    {
+                        heading: 'Scientific Evidence for N-Back Training',
+                        content: 'The Dual N-Back task gained worldwide attention after a landmark 2008 study by Jaeggi, Buschkuehl, Jonides, and Perrig published in the Proceedings of the National Academy of Sciences demonstrated that training on Dual N-Back tasks could improve fluid intelligence, which was previously believed to be fixed and unchangeable. Fluid intelligence refers to the ability to reason and solve novel problems independent of previously acquired knowledge. Subsequent studies have shown that regular N-Back training can enhance working memory capacity, improve attention control, and strengthen the prefrontal cortex, the brain region responsible for executive function and decision-making.'
+                    },
+                    {
+                        heading: 'How to Improve Your N-Back Level',
+                        content: 'The key to improving at Dual N-Back is consistent daily practice. Start with short sessions of 10 to 15 minutes and gradually increase duration. Focus on one modality at a time when starting out. Many beginners find the audio component easier, so try to lock in your audio matching first, then layer in visual matching. Do not be discouraged by initial difficulty. Most people start at 1-Back or 2-Back and it can take weeks of regular practice to reach 3-Back or higher. The cognitive benefits accumulate over time with consistent training.'
+                    }
+                ]}
+                keywords={['dual n-back', 'working memory training', 'fluid intelligence', 'cognitive training', 'brain training exercise', 'n-back game online', 'memory improvement', 'prefrontal cortex training']}
+            />
         </main>
     );
 };

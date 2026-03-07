@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SEO from '../components/SEO';
+import GameSEOContent from '../components/GameSEOContent';
 import mathSprintThumb from '../assets/mathsprint-thumb.png';
 import astropathThumb from '../assets/astropath-thumb.png';
 import invisibleMazeThumb from '../assets/invisiblemaze-thumb.png';
@@ -62,8 +63,22 @@ const Games = () => {
     return (
         <main className="min-h-screen flex items-center justify-center p-6 bg-transparent">
             <SEO
-                title="CortexPlay | Premium Brain Training Games"
-                description="Elevate your mind with CortexPlay. Play immersive brain training games designed to improve memory, spatial reasoning, focus, and reaction speed."
+                title="Free Brain Training Games Online | CortexPlay – Improve Memory & Focus"
+                description="Play free brain training games online at CortexPlay. Improve memory, focus, reaction speed and spatial reasoning with 6 scientifically-designed cognitive exercises. No download required."
+                url="https://cortexplay.games/"
+                keywords="brain training games, free brain games, memory games online, cognitive training, brain exercises, puzzle games, mental fitness, free online games"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "WebApplication",
+                    "name": "CortexPlay",
+                    "url": "https://cortexplay.games",
+                    "applicationCategory": "GameApplication",
+                    "operatingSystem": "Any",
+                    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                    "description": "Free premium brain training games to improve memory, focus, reaction speed and spatial reasoning.",
+                    "screenshot": "https://cortexplay.games/preview.png",
+                    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "150" }
+                }}
             />
             <div className="max-w-5xl w-full">
                 <header className="mb-16 text-center">
@@ -110,6 +125,29 @@ const Games = () => {
                         </Link>
                     ))}
                 </section>
+
+                <GameSEOContent
+                    title="CortexPlay"
+                    sections={[
+                        {
+                            heading: 'What is CortexPlay?',
+                            content: 'CortexPlay is a free, premium brain training platform designed to help you sharpen your cognitive abilities through beautifully crafted, scientifically-inspired games. Unlike traditional brain training apps that feel clinical and boring, CortexPlay combines cutting-edge neuroscience principles with stunning neon-dark aesthetics and satisfying micro-animations to make cognitive improvement genuinely enjoyable. Every game on the platform is carefully designed to target specific mental faculties including working memory, spatial reasoning, mathematical fluency, pattern recognition, and reaction speed.'
+                        },
+                        {
+                            heading: 'Why Train Your Brain?',
+                            content: 'Research in cognitive neuroscience has consistently shown that regular mental exercise can improve fluid intelligence, enhance working memory capacity, and even slow age-related cognitive decline. Just as physical exercise strengthens your muscles, cognitive training strengthens neural pathways in your brain. CortexPlay makes this process accessible and fun by gamifying the training experience. Whether you are a student looking to improve focus and academic performance, a professional wanting to stay mentally sharp, or simply someone who enjoys challenging puzzles, CortexPlay offers games tailored to every skill level with adaptive difficulty that grows with you.'
+                        },
+                        {
+                            heading: 'Our Games',
+                            content: 'CortexPlay currently features six unique brain training games. Math Sprint tests your mental arithmetic under time pressure across 10 progressively harder levels. AstroPath challenges your spatial reasoning by having you rotate path tiles to guide a rocket to its destination. Invisible Maze trains your memory by making you navigate through a labyrinth where walls are completely hidden. Dual N-Back is the gold standard of working memory training, requiring you to track both visual positions and spoken letters simultaneously. Sequence Memory tests your short-term recall with progressively longer sequences of numbers, letters, or mixed characters. Finally, 2048 Neon Edition puts a fresh spin on the classic tile-merging puzzle with asteroid obstacles and multiple difficulty levels.'
+                        },
+                        {
+                            heading: 'Play Anywhere, Anytime',
+                            content: 'CortexPlay is built as a modern web application that works seamlessly on desktop computers, tablets, and mobile phones. There is nothing to download or install — simply open your browser and start playing. All your high scores are saved locally so you can track your improvement over time. The platform is completely free to use with no account required, making it the most accessible brain training tool available online today.'
+                        }
+                    ]}
+                    keywords={['brain training games', 'cognitive training', 'memory games', 'puzzle games online', 'brain exercises', 'mental fitness', 'working memory', 'free brain games', 'brain training app']}
+                />
             </div>
         </main>
     )

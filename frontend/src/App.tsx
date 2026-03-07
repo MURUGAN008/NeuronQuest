@@ -9,6 +9,7 @@ import Game2048 from './games/Game2048/Game2048';
 import Games from './pages/Games'
 import { SoundProvider } from './context/SoundContext'
 import SoundToggle from './components/SoundToggle'
+import Footer from './components/Footer'
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
 
@@ -27,6 +28,7 @@ const App = () => {
       </Routes>
       <Analytics />
       <SpeedInsights />
+      <Footer />
     </SoundProvider>
   )
 }

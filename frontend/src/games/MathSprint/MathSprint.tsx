@@ -7,6 +7,7 @@ import useTimer from "../../hooks/useTimer";
 import { useSoundEnabled } from "../../context/SoundContext";
 import { playFailSound } from "../../utils/sounds";
 import SEO from "../../components/SEO";
+import GameSEOContent from "../../components/GameSEOContent";
 
 const MathSprint = () => {
     const { soundEnabled } = useSoundEnabled();
@@ -98,7 +99,25 @@ const MathSprint = () => {
 
     return (
         <main className="min-h-screen bg-transparent flex flex-col items-center pt-20 pb-10 px-4">
-            <SEO title="Math Sprint | CortexPlay" description="Race against the clock to solve math sequences in Math Sprint." />
+            <SEO
+                title="Math Sprint – Free Mental Math Speed Game Online | CortexPlay"
+                description="Play Math Sprint free online. Race against the clock to solve mental math problems across 10 levels. Improve arithmetic speed, numerical fluency and cognitive performance. No download needed."
+                url="https://cortexplay.games/MathSprint"
+                keywords="mental math game, math speed test, arithmetic training, free math game online, brain math exercises, number games, math puzzle game"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "VideoGame",
+                    "name": "Math Sprint",
+                    "url": "https://cortexplay.games/MathSprint",
+                    "description": "A fast-paced mental arithmetic game with 10 progressively harder levels. Test and improve your math speed.",
+                    "genre": "Brain Training",
+                    "gamePlatform": "Web Browser",
+                    "applicationCategory": "Game",
+                    "operatingSystem": "Any",
+                    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                    "publisher": { "@type": "Organization", "name": "CortexPlay", "url": "https://cortexplay.games" }
+                }}
+            />
             <h1 className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight text-gradient-cyan neon-text-cyan drop-shadow-lg">Math Sprint</h1>
             {roundState !== 'GAME_OVER' && (
                 <header className="mb-8 flex flex-col items-center">
@@ -164,6 +183,29 @@ const MathSprint = () => {
                     )}
                 </>
             )}
+
+            <GameSEOContent
+                title="Math Sprint"
+                sections={[
+                    {
+                        heading: 'How to Play Math Sprint',
+                        content: 'Math Sprint is a fast-paced mental arithmetic game that challenges you to solve math problems under intense time pressure. Each round presents you with a set of numbered bubbles that must be clicked in the correct ascending order based on their calculated values. The game features 10 progressively harder levels, starting with simple addition and subtraction before introducing multiplication, division, and multi-step operations. You earn points for each correct answer, with bonus points awarded for perfect rounds and remaining time on the clock.'
+                    },
+                    {
+                        heading: 'Scoring System & Progression',
+                        content: 'Your score in Math Sprint is calculated based on accuracy and speed. Each level awards base points multiplied by the level number, and a time bonus rewards players who solve problems quickly. A perfect round where every bubble is selected in the exact correct order earns the maximum score. The game dynamically increases the number of bubbles from 3 at the early levels to 5 at the higher levels, and the mathematical operations become significantly more complex. To clear the full game, you must maintain at least 70% accuracy across all 10 levels. Falling below this threshold results in a game over.'
+                    },
+                    {
+                        heading: 'Cognitive Benefits of Mental Math',
+                        content: 'Practicing mental arithmetic regularly has been shown to improve numerical fluency, enhance working memory, and strengthen the brain\'s executive function. Studies published in journals like Cognitive Psychology and Neuropsychologia demonstrate that individuals who regularly engage in mental math exercises show improved performance in problem-solving tasks, faster decision-making, and better academic and professional outcomes. Math Sprint is specifically designed to push you just beyond your comfort zone with its adaptive difficulty system, ensuring that the training remains challenging and effective as your skills improve over time.'
+                    },
+                    {
+                        heading: 'Tips for High Scores',
+                        content: 'Focus on evaluating all the bubbles before clicking any of them. Look for the smallest and largest values first to establish your ordering anchors. In later levels where operations get complex, try to estimate values rather than compute exact answers — often you only need to know which value is larger, not the precise number. Practice regularly to build mental shortcuts for common multiplication tables and division patterns.'
+                    }
+                ]}
+                keywords={['mental math game', 'arithmetic training', 'math puzzle', 'brain math exercises', 'number games online', 'math speed test', 'cognitive math training']}
+            />
         </main>
     );
 }

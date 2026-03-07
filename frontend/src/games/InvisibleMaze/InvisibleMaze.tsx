@@ -4,6 +4,7 @@ import type { MazeConfig, Point } from './MazeGenerator';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
 import SEO from '../../components/SEO';
+import GameSEOContent from '../../components/GameSEOContent';
 
 // Use clear visual SVGs for Key, Door, Player
 const PlayerSVG = ({ className }: { className?: string }) => (
@@ -194,7 +195,25 @@ const InvisibleMaze = () => {
 
     return (
         <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
-            <SEO title="Invisible Maze | CortexPlay" description="Memorize the hidden walls and navigate the Invisible Maze." />
+            <SEO
+                title="Invisible Maze – Free Memory Maze Game Online | CortexPlay"
+                description="Play Invisible Maze free online. Navigate a labyrinth with hidden walls using only your memory. Train spatial memory, cognitive mapping and hippocampal function. No download required."
+                url="https://cortexplay.games/invisible-maze"
+                keywords="memory maze game, invisible maze puzzle, brain maze game, spatial memory training, free maze game online, cognitive mapping game, memory training"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "VideoGame",
+                    "name": "Invisible Maze",
+                    "url": "https://cortexplay.games/invisible-maze",
+                    "description": "A memory-based maze game where walls are invisible. Memorize, navigate, and escape.",
+                    "genre": "Puzzle",
+                    "gamePlatform": "Web Browser",
+                    "applicationCategory": "Game",
+                    "operatingSystem": "Any",
+                    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                    "publisher": { "@type": "Organization", "name": "CortexPlay", "url": "https://cortexplay.games" }
+                }}
+            />
             <h1 className="text-4xl md:text-5xl font-black mb-2 tracking-tight text-gradient-cyan neon-text-cyan drop-shadow-lg">Invisible Maze</h1>
             <p className="text-slate-300 font-medium mb-6 text-center max-w-lg tracking-wide">
                 Memorize the hidden walls. Grab the Key, reach the Door. Hitting a wall resets you and drops the key!
@@ -332,6 +351,29 @@ const InvisibleMaze = () => {
                     <span>←</span> Back to Games
                 </a>
             )}
+
+            <GameSEOContent
+                title="Invisible Maze"
+                sections={[
+                    {
+                        heading: 'How to Play Invisible Maze',
+                        content: 'Invisible Maze is a unique memory-based puzzle game where you must navigate through a grid-based labyrinth with completely hidden walls. The maze contains invisible barriers between cells that you can only discover by walking into them. When you hit an invisible wall, the wall edge flashes red briefly, your position resets to the start, and you drop any collected items. Your objective in each level is to pick up the key first, then navigate to the locked door to escape. Use arrow keys or WASD on desktop, or the on-screen directional buttons on mobile, to move your character through the grid.'
+                    },
+                    {
+                        heading: 'Memorization Strategy',
+                        content: 'The core challenge of Invisible Maze is memory. Each time you hit a wall, you learn valuable information about where barriers exist in the maze. Successful players build a mental map of the maze by systematically exploring edges and remembering which paths are blocked. Early crashes are actually helpful because they reveal wall positions that you can then avoid on subsequent attempts. The key strategy is to be methodical — explore one row or column at a time rather than randomly wandering. As levels progress, the grid grows larger, requiring you to hold increasingly complex spatial maps in your working memory.'
+                    },
+                    {
+                        heading: 'Cognitive Benefits of Spatial Memory Training',
+                        content: 'Invisible Maze directly trains your spatial memory and cognitive mapping abilities. Research in neuroscience has shown that spatial navigation tasks activate the hippocampus — the brain region critical for forming and retrieving memories. Studies on London taxi drivers, published in Proceedings of the National Academy of Sciences, demonstrated significantly enlarged hippocampal volumes due to years of spatial navigation practice, suggesting that spatial memory training can produce measurable structural changes in the brain. By playing Invisible Maze regularly, you exercise these same neural pathways, potentially improving your ability to remember locations, navigate new environments, and maintain complex mental representations.'
+                    },
+                    {
+                        heading: 'Tips for Beating Harder Levels',
+                        content: 'On harder levels with larger grids, try to find the key first using the most direct path possible. Once you have the key\'s location memorized, plan a safe route to the door. Remember that hitting a wall resets your position AND makes you drop the key, so once you pick up the key, you need to navigate flawlessly to the door. Use the edges of the grid as reference points to build your mental map systematically.'
+                    }
+                ]}
+                keywords={['memory maze game', 'spatial memory training', 'invisible wall puzzle', 'brain memory game', 'maze navigation', 'cognitive mapping', 'hippocampus training']}
+            />
         </main>
     );
 };

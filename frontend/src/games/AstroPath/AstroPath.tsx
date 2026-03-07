@@ -11,6 +11,7 @@ import ChevronTurnLeft from './components/ChevronTurnLeft';
 import RocketLogo from './components/RocketLogo';
 import PlanetLogo from './components/PlanetLogo';
 import SEO from '../../components/SEO';
+import GameSEOContent from '../../components/GameSEOContent';
 
 // Hook for the timer
 function useTimer(initialTime: number) {
@@ -182,7 +183,25 @@ const AstroPath = () => {
 
     return (
         <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-10 pb-10 px-4 font-sans select-none overflow-x-hidden">
-            <SEO title="AstroPath | CortexPlay" description="Connect the nodes and chart a course through the stars in AstroPath." />
+            <SEO
+                title="AstroPath – Free Spatial Reasoning Puzzle Game Online | CortexPlay"
+                description="Play AstroPath free online. Rotate path tiles to guide a rocket to its destination. Train spatial reasoning, mental rotation and STEM problem-solving skills. No download required."
+                url="https://cortexplay.games/astropath"
+                keywords="spatial reasoning game, path puzzle game, tile rotation puzzle, STEM brain training, spatial awareness game, free puzzle game online, mental rotation"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "VideoGame",
+                    "name": "AstroPath",
+                    "url": "https://cortexplay.games/astropath",
+                    "description": "A spatial reasoning puzzle game where you rotate path tiles to guide a rocket through the stars.",
+                    "genre": "Puzzle",
+                    "gamePlatform": "Web Browser",
+                    "applicationCategory": "Game",
+                    "operatingSystem": "Any",
+                    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                    "publisher": { "@type": "Organization", "name": "CortexPlay", "url": "https://cortexplay.games" }
+                }}
+            />
             <h1 className="text-4xl md:text-5xl font-black mb-2 tracking-tight text-emerald-400 neon-text-emerald drop-shadow-lg w-full text-center">AstroPath</h1>
 
             <header className="flex w-full max-w-2xl justify-between items-center glass-panel p-4 rounded-3xl mb-8">
@@ -319,6 +338,29 @@ const AstroPath = () => {
                     <span>←</span> Back to Games
                 </a>
             )}
+
+            <GameSEOContent
+                title="AstroPath"
+                sections={[
+                    {
+                        heading: 'How to Play AstroPath',
+                        content: 'AstroPath is a spatial reasoning puzzle game where your goal is to create an unbroken path from the rocket to the destination planet by rotating path tiles on a grid. Each tile contains a directional chevron — either a straight piece, a right turn, or a left turn — and clicking a tile rotates it 90 degrees clockwise. You must connect all the tiles so the rocket can travel from its starting position on the left edge of the grid to the planet on the right edge. The challenge increases as grids get larger and time limits get tighter with each level.'
+                    },
+                    {
+                        heading: 'Scoring & Level Progression',
+                        content: 'Your AstroPath score is calculated using three factors: a level base bonus that increases with each stage, a time bonus that rewards faster completion, and a rotation penalty that subtracts points for each tile rotation you make. This scoring system encourages you to plan your moves carefully before clicking, rewarding players who can visualize the correct path mentally before committing to rotations. The grid starts at 4x4 and grows larger every two levels, eventually reaching sizes that require genuine spatial planning and mental rotation ability. The timer also decreases as levels progress, adding another layer of pressure.'
+                    },
+                    {
+                        heading: 'Cognitive Benefits of Spatial Reasoning',
+                        content: 'Spatial reasoning — the ability to mentally manipulate and rotate objects — is one of the strongest predictors of success in STEM fields according to research published in the journal Science. Regularly practicing spatial puzzles like AstroPath has been shown to improve mental rotation ability, enhance spatial working memory, and strengthen the brain\'s parietal cortex. These skills transfer directly to real-world tasks including reading maps, understanding architectural or engineering diagrams, solving geometry problems, and even improving performance in competitive video games. AstroPath is specifically designed to provide progressively challenging spatial exercises.'
+                    },
+                    {
+                        heading: 'Strategy Tips',
+                        content: 'Start by identifying the entry and exit points on the grid, then work backwards from the destination planet. Look for tiles that are already correctly oriented and build your path around them. Minimize unnecessary rotations to maximize your score. On larger grids, try to identify the general direction the path needs to flow before rotating individual tiles. The rocket animation after solving each puzzle shows you exactly how the path was traversed, helping you learn from each attempt.'
+                    }
+                ]}
+                keywords={['spatial reasoning game', 'path puzzle', 'tile rotation game', 'STEM brain training', 'spatial awareness', 'puzzle game online', 'mental rotation']}
+            />
         </main>
     );
 };

@@ -3,6 +3,7 @@ import { generateSequence, type SequenceMode } from './SequenceEngine';
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
 import SEO from '../../components/SEO';
+import GameSEOContent from '../../components/GameSEOContent';
 
 const INITIAL_SEQUENCE_LENGTH = 3;
 const DISPLAY_DURATION_MS = 1000; // How long each item shows
@@ -195,7 +196,25 @@ const SequenceMemory = () => {
 
     return (
         <main className="min-h-screen bg-transparent flex flex-col items-center pt-20 pb-10 px-4">
-            <SEO title="Sequence Memory | CortexPlay" description="Test your cognitive memory limits with Sequence Memory." />
+            <SEO
+                title="Sequence Memory – Free Short-Term Memory Test Online | CortexPlay"
+                description="Play Sequence Memory free online. Test and improve your short-term memory by recalling sequences of numbers and letters. Progressive difficulty from 3 to 15+ characters. No download required."
+                url="https://cortexplay.games/sequence-memory"
+                keywords="sequence memory game, short-term memory test, memory span training, digit span test, working memory game online, free memory game, memory improvement"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "VideoGame",
+                    "name": "Sequence Memory",
+                    "url": "https://cortexplay.games/sequence-memory",
+                    "description": "A short-term memory training game. Memorize and recall progressively longer sequences of numbers and letters.",
+                    "genre": "Brain Training",
+                    "gamePlatform": "Web Browser",
+                    "applicationCategory": "Game",
+                    "operatingSystem": "Any",
+                    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                    "publisher": { "@type": "Organization", "name": "CortexPlay", "url": "https://cortexplay.games" }
+                }}
+            />
             <h1 className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight text-gradient-cyan neon-text-cyan drop-shadow-lg">Sequence Memory</h1>
 
             {(gameState !== 'START' && gameState !== 'GAME_OVER') && (
@@ -329,6 +348,29 @@ const SequenceMemory = () => {
                     </div>
                 );
             })()}
+
+            <GameSEOContent
+                title="Sequence Memory"
+                sections={[
+                    {
+                        heading: 'How to Play Sequence Memory',
+                        content: 'Sequence Memory is a cognitive training game designed to test and improve your short-term memory capacity. At the start of each round, a sequence of characters is flashed on screen one at a time. You must memorize the entire sequence and then reproduce it by typing each character into the corresponding input box. The game offers three difficulty modes: Numbers Only which uses digits 0 through 9, Letters Only which uses uppercase A through Z, and Mixed Mode which combines both numbers and letters for the ultimate challenge. Each mode has its own scoring multiplier, with Mixed Mode offering double points.'
+                    },
+                    {
+                        heading: 'Progressive Difficulty',
+                        content: 'Sequence Memory starts with a sequence length of 3 characters and adds one additional character with each level you successfully complete. This means by level 5 you are memorizing 7 characters, by level 10 you are handling 12 characters, and dedicated players can push beyond 15 or more characters in a single sequence. To advance to the next level, you must achieve at least 70 percent accuracy on the current round. Falling below this threshold ends the game. The progressive structure ensures that the game always remains challenging regardless of your current skill level, pushing your memory capacity further with every successful round.'
+                    },
+                    {
+                        heading: 'The Science of Short-Term Memory',
+                        content: 'The concept behind Sequence Memory is rooted in George Miller\'s famous 1956 research paper titled "The Magical Number Seven, Plus or Minus Two" which established that the average human short-term memory can hold approximately 7 items. However, research has since shown that this capacity can be expanded through practice and the use of chunking strategies. By regularly playing Sequence Memory, you train your brain to hold more information in its phonological loop, a component of working memory responsible for temporarily storing verbal and acoustic information. This training has practical applications in everyday life, from remembering phone numbers and passwords to retaining information during conversations and lectures.'
+                    },
+                    {
+                        heading: 'Memory Techniques & Tips',
+                        content: 'To excel at Sequence Memory, try grouping characters into chunks of 2 or 3 rather than memorizing them individually. For number sequences, look for patterns or create associations. For letter sequences, try forming pseudo-words or acronyms. In Mixed Mode, separate numbers and letters mentally to reduce cognitive load. Practice the OTP-style input by working left to right and using the arrow keys to navigate between boxes. Consistent daily practice of even 5 to 10 minutes can produce measurable improvements in your memory span within a few weeks.'
+                    }
+                ]}
+                keywords={['sequence memory game', 'short-term memory test', 'memory span training', 'digit span', 'working memory game', 'memory improvement', 'cognitive memory training', 'free memory game']}
+            />
 
         </main>
     );

@@ -12,6 +12,7 @@ import {
 import { useSoundEnabled } from '../../context/SoundContext';
 import { playFailSound } from '../../utils/sounds';
 import SEO from '../../components/SEO';
+import GameSEOContent from '../../components/GameSEOContent';
 
 const Game2048 = () => {
     const { soundEnabled } = useSoundEnabled();
@@ -185,8 +186,23 @@ const Game2048 = () => {
     return (
         <main className="min-h-screen bg-transparent text-slate-100 flex flex-col items-center pt-8 pb-10 px-4 font-sans select-none overflow-x-hidden">
             <SEO
-                title="2048 | CortexPlay"
-                description="Play 2048 neon edition on CortexPlay. Swipe, merge tiles, and test your logic while dodging asteroids in this premium puzzle game."
+                title="2048 Online – Free Neon Puzzle Game with Levels & Obstacles | CortexPlay"
+                description="Play 2048 online free with neon visuals, multiple levels and asteroid obstacles. Merge tiles, reach the target number and challenge your strategic thinking. No download required."
+                url="https://cortexplay.games/2048"
+                keywords="2048 online, 2048 game free, play 2048, tile merge game, number puzzle game, 2048 with levels, logic puzzle game, free 2048 game"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "VideoGame",
+                    "name": "2048 Neon Edition",
+                    "url": "https://cortexplay.games/2048",
+                    "description": "The classic 2048 tile-merging puzzle reimagined with neon visuals, multiple levels, and asteroid obstacles.",
+                    "genre": "Puzzle",
+                    "gamePlatform": "Web Browser",
+                    "applicationCategory": "Game",
+                    "operatingSystem": "Any",
+                    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                    "publisher": { "@type": "Organization", "name": "CortexPlay", "url": "https://cortexplay.games" }
+                }}
             />
             {/* Header */}
             <header className="w-full max-w-lg flex justify-between items-end mb-8">
@@ -287,6 +303,29 @@ const Game2048 = () => {
                     ← Back to Menu
                 </a>
             )}
+
+            <GameSEOContent
+                title="2048"
+                sections={[
+                    {
+                        heading: 'How to Play 2048',
+                        content: '2048 is the beloved tile-merging puzzle game reimagined with CortexPlay\'s signature neon-dark aesthetic. The objective is simple: slide numbered tiles on a grid using arrow keys, WASD, or swipe gestures on mobile devices. When two tiles with the same number collide, they merge into one tile with double the value. Your goal is to create a tile with the target value to clear the level. The game starts on a 4x4 grid with a target of 512, but as you progress through levels, the grid size changes and asteroids appear as impassable obstacles, dramatically increasing the strategic complexity.'
+                    },
+                    {
+                        heading: 'Multi-Level Progression System',
+                        content: 'Unlike the original 2048 which ends when you reach the 2048 tile, CortexPlay\'s version features a multi-level progression system with increasing difficulty. Level 1 starts with a standard 4x4 grid targeting the 512 tile. Higher levels introduce larger grid sizes, higher target values, and asteroid obstacles that block tile movement and add an entirely new dimension to the strategy. Your score carries over between levels, and your all-time best score is saved locally so you can track your improvement over time. Each level is designed to test a different aspect of strategic thinking, from basic merge planning to advanced obstacle navigation.'
+                    },
+                    {
+                        heading: 'Why 2048 is Great for Your Brain',
+                        content: 'While 2048 appears simple on the surface, it actually engages multiple cognitive faculties simultaneously. The game requires spatial planning to predict where tiles will end up after each move, strategic foresight to avoid creating unmergeable tile configurations, numerical reasoning to track merge values, and risk assessment when deciding between aggressive and conservative plays. Research on puzzle games published in the journal PLoS ONE has demonstrated that regular engagement with logic puzzles can improve executive function, enhance problem-solving abilities, and develop the kind of strategic thinking skills that transfer to academic and professional decision-making contexts.'
+                    },
+                    {
+                        heading: 'Pro Strategy Tips',
+                        content: 'The most important strategy in 2048 is to pick a corner and keep your highest-value tile there at all times. The classic approach is to use the bottom-left corner as your anchor. Try to build a descending sequence along one edge of the board, with your highest tile in the corner. Avoid moving in the direction that would dislodge your highest tile from its corner position. On levels with asteroid obstacles, plan your tile flow around the blocked cells by thinking of them as permanent walls. Build merge chains by keeping sequential values adjacent to each other rather than scattered across the grid.'
+                    }
+                ]}
+                keywords={['2048 game online', '2048 puzzle', 'tile merge game', 'number puzzle game', 'logic puzzle', '2048 strategy', 'brain puzzle game', 'free 2048']}
+            />
         </main>
     );
 };
