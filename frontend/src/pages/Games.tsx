@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SEO from '../components/SEO';
 import GameSEOContent from '../components/GameSEOContent';
 import mathSprintThumb from '../assets/mathsprint-thumb.png';
@@ -9,6 +9,8 @@ import sequenceMemoryThumb from '../assets/sequencememory-thumb.png';
 import Game2048Thumb from '../assets/2048-thumb.png';
 
 const Games = () => {
+    const navigate = useNavigate();
+
     const games = [
         {
             id: 'math-sprint',
@@ -60,6 +62,12 @@ const Games = () => {
         }
     ];
 
+    const playRandomGame = () => {
+        const paths = games.map(g => g.path);
+        const randomPath = paths[Math.floor(Math.random() * paths.length)];
+        navigate(randomPath);
+    };
+
     return (
         <main className="min-h-screen flex items-center justify-center p-6 bg-transparent">
             <SEO
@@ -85,9 +93,23 @@ const Games = () => {
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-gradient-cyan neon-text-cyan drop-shadow-lg">
                         CortexPlay
                     </h1>
-                    <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium">
+                    <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium mb-8">
                         Sharpen your mind with our premium cognitive training platform.
                     </p>
+
+                    {/* Play Random Game Button */}
+                    <button
+                        onClick={playRandomGame}
+                        className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl glass-panel glass-panel-hover font-bold text-lg text-cyan-400 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] active:scale-95"
+                    >
+                        <span className="text-2xl group-hover:animate-bounce">🎲</span>
+                        <span className="group-hover:neon-text-cyan transition-all">Play Random Game</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform group-hover:translate-x-2 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                        {/* Subtle pulsing glow */}
+                        <div className="absolute inset-0 rounded-2xl bg-cyan-500/5 animate-pulse pointer-events-none" />
+                    </button>
                 </header>
 
                 <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label="Game Selection">
