@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Games from './pages/Games'
