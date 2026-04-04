@@ -110,6 +110,13 @@ const Games = () => {
                         {/* Subtle pulsing glow */}
                         <div className="absolute inset-0 rounded-2xl bg-cyan-500/5 animate-pulse pointer-events-none" />
                     </button>
+
+                    {/* Quick Navigation */}
+                    <nav className="mt-6 flex items-center justify-center gap-6 text-sm">
+                        <Link to="/blog" className="text-slate-400 hover:text-cyan-400 transition-colors font-medium">📚 Blog</Link>
+                        <Link to="/about" className="text-slate-400 hover:text-cyan-400 transition-colors font-medium">ℹ️ About</Link>
+                        <Link to="/contact" className="text-slate-400 hover:text-cyan-400 transition-colors font-medium">✉️ Contact</Link>
+                    </nav>
                 </header>
 
                 <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label="Game Selection">
